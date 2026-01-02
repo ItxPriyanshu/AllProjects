@@ -19,10 +19,10 @@ class CustomButton extends StatelessWidget {
       ),
       child: ElevatedButton(
         onPressed: onTap,
-        child: Text(text,style: TextStyle(fontSize: 16,color: Colors.white),),
         style: ElevatedButton.styleFrom(minimumSize: Size(width, 50),
         shape:RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(0))
         ),
+        child: Text(text,style: TextStyle(fontSize: 16,color: Colors.white),),
       ),
     );
   }

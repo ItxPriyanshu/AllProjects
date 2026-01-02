@@ -8,11 +8,11 @@ class CustomTextfield extends StatelessWidget {
   final String hintText;
   final bool isReadOnly;
   const CustomTextfield({
-    Key? key,
+    super.key,
     required this.controller,
     required this.hintText,
      this.isReadOnly=false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

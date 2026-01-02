@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tictactoe/provider/room_data_provider.dart';
 import 'package:tictactoe/resources/socket_methods.dart';
+import 'package:tictactoe/screens/gameScreen.dart';
 import 'package:tictactoe/widgets/custom_botton.dart';
 import 'package:tictactoe/widgets/custom_text.dart';
 import 'package:tictactoe/widgets/custom_textfield.dart';
@@ -19,10 +22,19 @@ class _CreateroomscreenState extends State<Createroomscreen> {
   final SocketMethods _socketmethods = SocketMethods();
 
     @override
-    void initState(){
-      super.initState();
-      _socketmethods.createRoomSuccessListener(context);
-    }
+void initState() {
+  super.initState();
+
+  _socketmethods.createRoomSuccessListener((room) {
+    final roomProvider =
+        Provider.of<RoomDataProvider>(context, listen: false);
+
+    roomProvider.updateRoomData(room);
+
+    if (!mounted) return;
+    Navigator.pushNamed(context, Gamescreen.routeName);
+  });
+}
 
 
 

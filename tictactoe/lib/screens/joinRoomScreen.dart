@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tictactoe/provider/room_data_provider.dart';
 import 'package:tictactoe/resources/socket_methods.dart';
+import 'package:tictactoe/screens/gameScreen.dart';
+import 'package:tictactoe/utils/utils.dart';
 import 'package:tictactoe/widgets/custom_botton.dart';
 import 'package:tictactoe/widgets/custom_text.dart';
 import 'package:tictactoe/widgets/custom_textfield.dart';
@@ -18,11 +22,25 @@ class _JoinroomscreenState extends State<Joinroomscreen> {
   final SocketMethods _SocketMethods = SocketMethods();
 
 @override
-void initState(){
+void initState() {
   super.initState();
-  _SocketMethods.joinRoomSuccessListener(context);
-  _SocketMethods.errorOccuredListener(context);
-  _SocketMethods.updatePlayersStateListener(context);
+
+  final roomProvider =
+      Provider.of<RoomDataProvider>(context, listen: false);
+
+  _SocketMethods.joinRoomSuccessListener((room) {
+    roomProvider.updateRoomData(room);
+
+    if (!mounted) return;
+    Navigator.pushNamed(context, Gamescreen.routeName);
+  });
+
+  _SocketMethods.updatePlayersListener(roomProvider);
+
+  _SocketMethods.errorListener((msg) {
+    if (!mounted) return;
+    showSnackBar(context, msg);
+  });
 }
 
   @override
@@ -71,6 +89,5 @@ void initState(){
         ),
       ),
     );
-    ;
   }
 }

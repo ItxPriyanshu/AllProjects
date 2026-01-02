@@ -76,13 +76,35 @@ io.on("connection", (socket) => {
     
     io.to(roomId).emit('joinRoomSuccess', room);
     io.to(roomId).emit('updatePlayers',room.players);
-    io.io(toomId).emit('updateRoom',room);
+    io.to(roomId).emit('updateRoom',room);
 
   } catch (e) {
     console.log(e);
     socket.emit('errorOccured', "Something went wrong");
   }
 });
+socket.on('tap',async({index,roomId})=>{
+  try{
+    let room = await Room.findById(roomId);
+    if (!room) return;
+    let choice = room.turn.playerType; //X or O
+    if(room.turnIndex==0){
+      room.turn = room.players[1];
+      room.turnIndex = 1;
+    } else{
+       room.turn = room.players[0];
+      room.turnIndex = 0;
+    }
+    room = await room.save();
+    io.to(roomId).emit('tapped',{
+      index,
+      choice,
+      room,
+    })
+  }catch(e){
+    console.log(e);
+  }
+})
 
 });
 

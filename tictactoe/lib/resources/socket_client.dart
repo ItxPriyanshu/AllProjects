@@ -5,13 +5,12 @@ class SocketClient {
   IO.Socket? socket;
 
   SocketClient._internal() {
-    socket = IO.io(
-      'http://10.25.185.20:3000',
-      {
-        'transports': ['websocket'],
-        'autoConnect': true, // ✅ MUST be true
-      },
-    );
+    socket = IO.io('http://10.241.84.20:3000', {
+      'transports': ['websocket'],
+      'autoConnect': true, // ✅ MUST be true
+      'reconnection': true,
+      'reconnectionAttempts': 5,
+    });
 
     socket!.onConnect((_) {
       print('✅ Flutter connected to server');
