@@ -5,7 +5,7 @@ class SocketClient {
   IO.Socket? socket;
 
   SocketClient._internal() {
-    socket = IO.io('http://10.241.84.20:3000', {
+    socket = IO.io('http://10.84.0.99:3000', {
       'transports': ['websocket'],
       'autoConnect': true, // ✅ MUST be true
       'reconnection': true,

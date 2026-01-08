@@ -1,26 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:tictactoe/model/player.dart';
 
 class RoomDataProvider extends ChangeNotifier {
-  // Full room object (contains _id, players, turn, etc.)
   Map<String, dynamic> _roomData = {};
-  List<String> _displayElement = ['','','','','','','','',''];
+
+  Player? _player1;
+  Player? _player2;
+
+  List<String> _displayElement = List.filled(9, '');
   int _filledBoxes = 0;
 
-  // Getter
+  // Getters
   Map<String, dynamic> get roomData => _roomData;
-  List<String>  get displayElements=>_displayElement;
+  Player? get player1 => _player1;
+  Player? get player2 => _player2;
+  List<String> get displayElements => _displayElement;
+  int get filledBoxes => _filledBoxes;
 
-  // Update whole room data (CreateRoomSuccess, joinRoomSuccess, updatePlayers)
+  // Update room data from socket
   void updateRoomData(Map<String, dynamic> data) {
     _roomData = data;
+
+    if (data['players'] != null && data['players'].length >= 2) {
+      _player1 = Player.fromMap(data['players'][0]);
+      _player2 = Player.fromMap(data['players'][1]);
+    }
+
     notifyListeners();
   }
 
-
-  void updateDisplayElements(int index,String choice){
-    if (_displayElement[index] != '') return;
-    _displayElement[index]=choice;
-    _filledBoxes+=1;
+  void updateDisplayElements(int index, String choice) {
+    if (_displayElement[index].isNotEmpty) return;
+    _displayElement[index] = choice;
+    _filledBoxes++;
     notifyListeners();
   }
+
+  void setFilledBoxesTo0(){
+    _filledBoxes =0;
+    notifyListeners();
+
+  }
+
+  void resetBoard() {
+    _displayElement = List.filled(9, '');
+    _filledBoxes = 0;
+    notifyListeners();
+  }
+
+  void updatePlayer1(Map<String, dynamic> playerData) {
+  _player1 = Player.fromMap(playerData);
+  notifyListeners();
+}
+
+void updatePlayer2(Map<String, dynamic> playerData) {
+  _player2 = Player.fromMap(playerData);
+  notifyListeners();
+}
+
 }

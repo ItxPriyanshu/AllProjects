@@ -18,7 +18,7 @@ class _TictactoeboardState extends State<Tictactoeboard> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     roomProvider = Provider.of<RoomDataProvider>(context, listen: false);
-    _socketMethods.tappedListener(roomProvider);
+    _socketMethods.tappedListener(context,roomProvider);
   }
 
     @override
@@ -40,39 +40,46 @@ class _TictactoeboardState extends State<Tictactoeboard> {
     RoomDataProvider roomDataProvider = Provider.of<RoomDataProvider>(context);
     return ConstrainedBox(
       constraints: BoxConstraints(maxHeight: size.height * 0.7, maxWidth: 500),
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-        ),
-        itemCount: 9,
-        itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-            onTap: () => tapped(index, roomDataProvider),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.white24),
-              ),
-              child: Center(
-                child: Text(
-                  roomDataProvider.displayElements[index],
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 100,
-                    shadows: [
-                      Shadow(
-                        blurRadius: 40,
-                        color: roomDataProvider.displayElements[index] == 'O'
-                            ? Colors.red
-                            : Colors.blue,
-                      ),
-                    ],
+      child: AbsorbPointer(
+//only allows the user whose turn is to play
+//if absorbing is true the touch events will be blocked until it gets to  false
+//so when my socket id and the turn's socket id is same then only it allows to click(play)
+        absorbing: roomDataProvider.roomData['turn']['socketID'] != _socketMethods.socketClient.id,
+
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+          ),
+          itemCount: 9,
+          itemBuilder: (BuildContext context, int index) {
+            return GestureDetector(
+              onTap: () => tapped(index, roomDataProvider),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white24),
+                ),
+                child: Center(
+                  child: Text(
+                    roomDataProvider.displayElements[index],
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 100,
+                      shadows: [
+                        Shadow(
+                          blurRadius: 40,
+                          color: roomDataProvider.displayElements[index] == 'O'
+                              ? Colors.red
+                              : Colors.blue,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

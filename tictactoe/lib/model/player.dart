@@ -25,7 +25,7 @@ class Player {
     return Player(
       nickname: map['nickname']??'',
       socketID: map['socketID']??'',
-      points: map['points']??0,
+      points: (map['points']??0).toDouble(),
       playerType: map['playerType']??'',
     );
   }
