@@ -1,8 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const http = require('http');
 const Mongoose = require('mongoose');
 const app = express();
-const port = process.env.PORT || 3000;
 var server = http.createServer(app);
 const Room = require('./models/rooms')
 var io = require('socket.io')(server);
@@ -11,7 +11,10 @@ var io = require('socket.io')(server);
 //middleware
 app.use(express.json());
 
-const DB = "mongodb+srv://priyanshu:priyanshu123@cluster0.ku6ojhd.mongodb.net/?appName=Cluster0";
+const DB = process.env.MONGO_URI;
+const port = process.env.PORT || 3000;
+
+
 
 io.on("connection", (socket) => {
   console.log("connected!");
