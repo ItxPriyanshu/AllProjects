@@ -1,5 +1,6 @@
 import 'package:dropnote/auth/login.dart';
 import 'package:dropnote/auth/sign_up.dart';
+import 'package:dropnote/features/landingscreen/landing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.black),
       ),
-      home: const SignUp(),
+      home: const LandingScreen(),
     ),
     );
      
