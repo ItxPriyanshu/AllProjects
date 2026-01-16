@@ -1,7 +1,5 @@
 import 'package:dropnote/features/homescreen/components/slider_drawer_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MySlidderDrawer extends StatefulWidget {
   const MySlidderDrawer({super.key});

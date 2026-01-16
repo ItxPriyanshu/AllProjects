@@ -1,3 +1,4 @@
+import 'package:dropnote/features/homescreen/components/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,7 +15,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
       backgroundColor: const Color.fromARGB(255, 12, 12, 12),
      
-      body:const Text('home'),
+      body:Column(
+        children: [
+          MyCarouselSlider(),
+          SizedBox(height: 10,),
+          Padding(
+            padding: const EdgeInsets.only(left: 10,right: 10),
+            child: Container(
+              color:  Colors.grey.withAlpha(100),
+              height: 1,
+            ),
+          ),
+
+        ],
+      ),
     );
   }
 }
