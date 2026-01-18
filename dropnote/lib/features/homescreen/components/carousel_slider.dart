@@ -30,7 +30,7 @@ class MyCarouselSlider extends ConsumerWidget {
                     
                     radius: 40,
                     // maxRadius: 70,
-                    backgroundColor: (index==currentIndex)?Colors.white:Colors.grey,
+                    backgroundColor: (index==currentIndex)?Colors.white:const Color.fromARGB(255, 155, 215, 138),
                     child: (index == currentIndex)
                         ? Icon(Icons.menu, color: Colors.black)
                         : Icon(Icons.more_horiz, color: Colors.black),
@@ -46,7 +46,7 @@ class MyCarouselSlider extends ConsumerWidget {
         // aspectRatio: 30/10,
         autoPlay: true,
         enlargeCenterPage: true,
-        autoPlayInterval: const Duration(seconds: 3),
+        autoPlayInterval: const Duration(seconds: 4),
         viewportFraction: 0.25.r,
         onPageChanged: (index,reason){
           ref.read(carouselIndexProvider.notifier).state = index;
