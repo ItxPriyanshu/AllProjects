@@ -1,39 +1,24 @@
-import 'package:dropnote/features/homescreen/components/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       backgroundColor: const Color.fromARGB(255, 12, 12, 12),
-     
-      body:SingleChildScrollView(
-        child: Column(
-          children: [
-            MyCarouselSlider(),
-            SizedBox(height: 10,),
 
-            //line below carousel slider
-            Padding(
-              padding: const EdgeInsets.only(left: 10,right: 10),
-              child: Container(
-                color:  Colors.grey.withAlpha(100),
-                height: 1,
-              ),
-            ),
-
-            //mid part
-            
-        
-          ],
+      //**top part**//
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10,bottom: 10,right: 10,top: 8),
+          child: Column(children: [
+            Row(
+              children: [
+                
+              ],
+            )
+          ],),
         ),
       ),
     );

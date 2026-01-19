@@ -97,6 +97,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.2"
+  country_flags:
+    dependency: transitive
+    description:
+      name: country_flags
+      sha256: "457c545369eaddcaa47dc351ea97f00dbe2ee74ee7b487a805b86c10d1dfd880"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.1"
   coverage:
     dependency: transitive
     description:
@@ -105,6 +113,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.15.0"
+  cross_file:
+    dependency: transitive
+    description:
+      name: cross_file
+      sha256: "701dcfc06da0882883a2657c445103380e53e647060ad8d9dfb710c100996608"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.5+1"
   crypto:
     dependency: transitive
     description:
@@ -121,6 +137,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
+  data_widget:
+    dependency: transitive
+    description:
+      name: data_widget
+      sha256: "4947aae3c50635496d56f94ad18de98e19015c5ebf01abee0f39a2c098c7021a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
+  email_validator:
+    dependency: transitive
+    description:
+      name: email_validator
+      sha256: b19aa5d92fdd76fbc65112060c94d45ba855105a28bb6e462de7ff03b12fa1fb
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
+  expressions:
+    dependency: transitive
+    description:
+      name: expressions
+      sha256: f3b0e99563a9a1bde1138e728eb722f292cc7d2aec55d28136c49b1a370306c5
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.5+3"
   fake_async:
     dependency: transitive
     description:
@@ -195,6 +235,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  gap:
+    dependency: transitive
+    description:
+      name: gap
+      sha256: f19387d4e32f849394758b91377f9153a1b41d79513ef7668c088c77dbc6955d
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   glob:
     dependency: transitive
     description:
@@ -235,6 +283,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.20.2"
   io:
     dependency: transitive
     description:
@@ -243,6 +299,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  jovial_misc:
+    dependency: transitive
+    description:
+      name: jovial_misc
+      sha256: "4301011027d87b8b919cb862db84071a34448eadbb32cc8d40fe505424dfe69a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.2"
+  jovial_svg:
+    dependency: transitive
+    description:
+      name: jovial_svg
+      sha256: "08dd24b800d48796c9c0227acb96eb00c6cacccb1d7de58d79fc924090049868"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.28"
   js:
     dependency: transitive
     description:
@@ -403,6 +475,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.0"
+  petitparser:
+    dependency: transitive
+    description:
+      name: petitparser
+      sha256: "1a97266a94f7350d30ae522c0af07890c70b8e62c71e8e3920d1db4d23c057d1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.1"
+  phonecodes:
+    dependency: transitive
+    description:
+      name: phonecodes
+      sha256: d963c19d35914cd83620e64125689a0c09047e25046639f2a124142ccf5868bb
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   platform:
     dependency: transitive
     description:
@@ -443,6 +531,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
+  quiver:
+    dependency: transitive
+    description:
+      name: quiver
+      sha256: ea0b925899e64ecdfbf9c7becb60d5b50e706ade44a85b2363be2a22d88117d2
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.2"
   riverpod:
     dependency: transitive
     description:
@@ -451,6 +547,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  rxdart:
+    dependency: transitive
+    description:
+      name: rxdart
+      sha256: "5c3004a4a8dbb94bd4bf5412a4def4acdaa12e12f269737a5751369e12d1a962"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.28.0"
+  shadcn_flutter:
+    dependency: "direct main"
+    description:
+      name: shadcn_flutter
+      sha256: "1fd4f798c39d6308dc8f7e94d9e870b5db39fbf417ea95c423c7555ce8227a1c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.47"
   shelf:
     dependency: transitive
     description:
@@ -483,6 +595,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+  skeletonizer:
+    dependency: transitive
+    description:
+      name: skeletonizer
+      sha256: "83157d8e2e41f0252079cfec496281c16e4c63660052dab8d4cd72a206bb7109"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -656,6 +776,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  xml:
+    dependency: transitive
+    description:
+      name: xml
+      sha256: "971043b3a0d3da28727e40ed3e0b5d18b742fa5a68665cca88e74b7876d5e025"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.6.1"
   yaml:
     dependency: transitive
     description:

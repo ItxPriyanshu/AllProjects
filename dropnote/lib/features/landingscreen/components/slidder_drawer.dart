@@ -1,4 +1,4 @@
-import 'package:dropnote/features/homescreen/components/slider_drawer_container.dart';
+import 'package:dropnote/features/landingscreen/components/slider_drawer_container.dart';
 import 'package:flutter/material.dart';
 
 class MySlidderDrawer extends StatefulWidget {
