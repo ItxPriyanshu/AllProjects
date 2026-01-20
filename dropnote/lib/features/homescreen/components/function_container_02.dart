@@ -35,7 +35,7 @@ class FunctionContainer02 extends StatelessWidget {
               backgroundColor: Colors.transparent,
               content: AwesomeSnackbarContent(
                 title: "Oh Wait!",
-                message: "The feature is in development 🛠️",
+                message: "This feature is currently under development. 🛠️",
                 contentType: ContentType.failure,
               ),
             );
