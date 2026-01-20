@@ -1,3 +1,5 @@
+import 'package:dropnote/features/homeScreen/components/function_container_01.dart';
+import 'package:dropnote/features/homeScreen/components/function_container_02.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -74,32 +76,91 @@ class HomeScreen extends StatelessWidget {
             ),
             SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Features",
-                    style: GoogleFonts.firaSans(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                  SizedBox(height: 30),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 7),
+                    child: Text(
+                      "Features",
+                      style: GoogleFonts.firaSans(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.start,
                     ),
-                    textAlign: TextAlign.start,
                   ),
+                  SizedBox(height: 10),
                   //features card/containers
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                     
-                      Container(
-                        
-                        width: 150.w,
-                        height: 170,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.lightGreenAccent.withAlpha(20),width: 1),
-                          borderRadius: BorderRadius.circular(16),
-                          color: Color.fromARGB(80, 62, 86, 76),
-                        ),
-                        child: Text('data'),
+                      FunctionContainer01(
+                        icon: Icons.checklist,
+                        icon2: Icons.check_circle_outline,
+                        title: "ToDo",
+                        subtitle: "Schedule your work",
+                        color: Colors.blue,
+                        wide: false,
+                      ),
+                      FunctionContainer01(
+                        icon: Icons.sticky_note_2,
+                        icon2: Icons.edit_note,
+                        color: Colors.pink,
+                        title: "Notes",
+                        subtitle: "Write your notes",
+                        wide: false,
                       ),
                     ],
+                  ),
+                  SizedBox(height: 10),
+                  FunctionContainer01(
+                    icon: Icons.alarm,
+                    icon2: Icons.alarm_add,
+                    color: Colors.orange,
+                    title: "Alarm",
+                    subtitle: "Set your alarm",
+                    wide: true,
+                  ),
+                  SizedBox(height: 30),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 7),
+                    child: Text(
+                      "Others",
+                      style: GoogleFonts.firaSans(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  FunctionContainer02(
+                    icon: Icons.cloud,
+                    color: Colors.lightBlue,
+                    title: "Weather",
+                    subtitle: "Current Weather",
+                    widget: Text(
+                      '23°',
+                      style: GoogleFonts.firaSans(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  FunctionContainer02(
+                    icon: Icons.wallet_outlined,
+                    color: Colors.lightBlueAccent,
+                    title: "Expenses",
+                    subtitle: "Track your expenses",
+                    widget: Text(
+                      '₹ 753',
+                      style: GoogleFonts.firaSans(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
                 ],
               ),

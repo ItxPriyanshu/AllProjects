@@ -28,8 +28,8 @@ class _NoteScreenState extends State<NoteScreen> {
           //**top part**//
 
           // MyCarouselSlider(),
-           Text('Features',style:GoogleFonts.firaSansCondensed(fontSize: 15,fontWeight: FontWeight.bold),),
-          SizedBox(height: 10),
+          //  Text('Features',style:GoogleFonts.firaSansCondensed(fontSize: 15,fontWeight: FontWeight.bold),),
+          // SizedBox(height: 10),
 
           //line below carousel slider
           Padding(
