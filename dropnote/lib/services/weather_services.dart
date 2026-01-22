@@ -1,4 +1,3 @@
-
 import 'package:dropnote/models/weather_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -10,6 +9,7 @@ class WeatherServices {
     final response = await http.get(url);
 
     if(response.statusCode==200){
+      // print(weather.fromJson(json.decode(response.body)));
       return weather.fromJson(json.decode(response.body));
     }else{
       throw Exception('Failed to load weather data');

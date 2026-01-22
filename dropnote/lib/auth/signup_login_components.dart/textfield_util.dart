@@ -25,6 +25,7 @@ class _TextfieldUtilState extends State<TextfieldUtil> {
     final isPassword = widget.title.toLowerCase().contains('password');
     
     return TextField(
+      cursorColor: Colors.black,
       controller: widget.controller,
       keyboardType: isPassword 
           ? TextInputType.visiblePassword 
