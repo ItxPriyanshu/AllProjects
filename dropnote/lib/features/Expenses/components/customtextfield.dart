@@ -16,12 +16,16 @@ class expenseTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
       keyboardType:keyboardType,
       cursorColor: Colors.white,
        controller: controller,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white.withAlpha(60),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
+
             color: Color.fromARGB(255, 255, 255, 255),
             width: 4,
           ),
@@ -34,7 +38,7 @@ class expenseTextField extends StatelessWidget {
         ),
         label: Text(
           title,
-          style: GoogleFonts.roboto(fontSize: 12, color: const Color.fromARGB(255, 255, 255, 255)),
+          style: GoogleFonts.roboto(fontSize: 12, color: const Color.fromARGB(255, 255, 255, 255),fontWeight: FontWeight.bold),
         ),
       ),
     );

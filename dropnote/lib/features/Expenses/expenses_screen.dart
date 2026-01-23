@@ -70,7 +70,7 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen>
             SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.only(
-                  left: 20,
+                  left: 10,
                   bottom: 10,
                   right: 10,
                   top: 15,
@@ -106,6 +106,8 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen>
                     ),
                     SizedBox(height: 50,),
                     //list of expenses
+
+                    (expenses.length>0)?
                     ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
@@ -119,6 +121,27 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen>
                           trailing: Text("₹${expense.amount}",style: GoogleFonts.firaSans(fontWeight: FontWeight.bold,fontSize: 17),),
                         );
                       },
+                    )
+                    //if list is empty ->>> container
+                    :Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Material(
+                        borderRadius: BorderRadius.circular(16),
+                        elevation: 3,
+                        shadowColor: Colors.white,
+                        child: Ink(
+                          height: 350.h,
+                          width: 300.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: Colors.green,
+                          ),
+                          child: Column(children: [
+                            Lottie.asset('assets/lotties/emptyGhost.json'),
+                            Text("No Expenses",style: GoogleFonts.luckiestGuy(fontSize: 30,color: Colors.white),),
+                          ],),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -215,7 +238,7 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen>
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
                               ),
-                              onPressed: () {
+                              onPressed: (spentoncontroller.text.length>0 && amountcontroller.text.length>0)? () {
                                 final newExpense = ExpenseItem(
                                   name: spentoncontroller.text,
                                   amount: amountcontroller.text,
@@ -226,14 +249,14 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen>
                                 spentoncontroller.clear();
                                 amountcontroller.clear();
                                 Navigator.pop(context);
-                              },
-                              child: Text(
+                              }:null,
+                              child: (spentoncontroller.text.length>0 && amountcontroller.text.length>0)?Text(
                                 "ADD",
                                 style: GoogleFonts.firaSansCondensed(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                 ),
-                              ),
+                              ):Text('--',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),),
                             ),
                           ),
                         ],
