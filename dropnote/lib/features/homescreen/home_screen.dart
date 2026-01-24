@@ -1,4 +1,5 @@
 import 'package:dropnote/features/Expenses/expenses_screen.dart';
+import 'package:dropnote/features/TODOScreen/todo_screen.dart';
 import 'package:dropnote/features/homeScreen/components/function_container_01.dart';
 import 'package:dropnote/features/homeScreen/components/function_container_02.dart';
 import 'package:dropnote/features/noteScreen/note_screen.dart';
@@ -174,6 +175,7 @@ void _getWeather() async {
                         children: [
                           //TODO//
                           FunctionContainer01(
+                            NavigateTo: TodoScreen(),
                             icon: Icons.checklist,
                             icon2: Icons.check_circle_outline,
                             title: "ToDo",

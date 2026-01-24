@@ -2,7 +2,7 @@ import 'package:dropnote/features/ProfileScreen/profile_screen.dart';
 import 'package:dropnote/features/homescreen/home_screen.dart';
 import 'package:dropnote/features/landingscreen/components/bottom_nav_bar.dart';
 import 'package:dropnote/features/TODOScreen/todo_screen.dart';
-import 'package:dropnote/providers/onscreen_provider.dart';
+import 'package:dropnote/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';

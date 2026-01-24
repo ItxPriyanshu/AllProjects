@@ -1,6 +1,6 @@
 import 'package:dropnote/features/Expenses/components/customtextfield.dart';
 import 'package:dropnote/models/expense_item.dart';
-import 'package:dropnote/providers/expense_provider.dart';
+import 'package:dropnote/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

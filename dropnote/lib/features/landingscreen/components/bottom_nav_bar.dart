@@ -1,4 +1,5 @@
-import 'package:dropnote/providers/onscreen_provider.dart';
+
+import 'package:dropnote/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
