@@ -1,5 +1,6 @@
 import 'package:dropnote/features/Expenses/expenses_screen.dart';
 import 'package:dropnote/features/TODOScreen/todo_screen.dart';
+import 'package:dropnote/features/alarmScreen/alarm_screen.dart';
 import 'package:dropnote/features/homeScreen/components/function_container_01.dart';
 import 'package:dropnote/features/homeScreen/components/function_container_02.dart';
 import 'package:dropnote/features/noteScreen/note_screen.dart';
@@ -198,6 +199,7 @@ void _getWeather() async {
                       SizedBox(height: 10),
                       //ALARM//
                       FunctionContainer01(
+                        NavigateTo: AlarmScreen(),
                         icon: Icons.alarm,
                         icon2: Icons.alarm_add,
                         color: Colors.orange,

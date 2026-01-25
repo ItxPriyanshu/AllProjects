@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:dropnote/data/todo_data.dart';
 import 'package:dropnote/features/Expenses/components/customtextfield.dart';
@@ -46,20 +47,42 @@ class _TodoScreenState extends ConsumerState<TodoScreen> {
                           child: Container(
                             decoration: BoxDecoration(
                               border: BoxBorder.all(
-                                color: const Color.fromARGB(255, 170, 157, 39),
+                                color: (todo.isDone)
+                                    ? Colors.white.withAlpha(20)
+                                    : Colors.white,
+                                // const Color.fromARGB(255, 170, 157, 39),
                                 width: 3,
                               ),
                               borderRadius: BorderRadius.circular(16),
-                              color: const Color.fromARGB(255, 27, 125, 205),
+                              color: (todo.isDone)
+                                  ? const Color.fromARGB(
+                                      255,
+                                      27,
+                                      125,
+                                      205,
+                                    ).withAlpha(20)
+                                  : const Color.fromARGB(255, 27, 125, 205),
                             ),
+
+                            //List with checkbox
                             child: CheckboxListTile(
-                            title:Text(todo.title,style: GoogleFonts.firaSans(decoration: (todo.isDone)? TextDecoration.lineThrough:null),),
-                              value: todo.isDone, 
-                            onChanged: (context){
-                              ref.read(todoProvider.notifier).toggleCheckDone(index);
-                            }
-                            
-                            )
+                              activeColor: Colors.green,
+                              checkColor: Colors.white,
+                              title: Text(
+                                todo.title,
+                                style: GoogleFonts.firaSans(
+                                  decoration: (todo.isDone)
+                                      ? TextDecoration.lineThrough
+                                      : null,
+                                ),
+                              ),
+                              value: todo.isDone,
+                              onChanged: (context) {
+                                ref
+                                    .read(todoProvider.notifier)
+                                    .toggleCheckDone(index);
+                              },
+                            ),
                           ),
                         );
                       },
@@ -95,8 +118,8 @@ class _TodoScreenState extends ConsumerState<TodoScreen> {
 
         //floating action button//
         floatingActionButton: FloatingActionButton(
-          splashColor: Colors.white.withAlpha(100),
-          backgroundColor: const Color.fromARGB(255, 48, 97, 188),
+          splashColor: const Color.fromARGB(255, 0, 0, 0).withAlpha(100),
+          backgroundColor: Color(0xFFF9C067),
           onPressed: () {
             showModalBottomSheet(
               context: context,
@@ -208,7 +231,7 @@ class _TodoScreenState extends ConsumerState<TodoScreen> {
               },
             );
           },
-          child: Icon(Icons.add),
+          child: Icon(Icons.add, color: Colors.black),
         ),
       ),
     );
