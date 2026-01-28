@@ -1,9 +1,9 @@
 import 'package:dropnote/features/Expenses/expenses_screen.dart';
 import 'package:dropnote/features/TODOScreen/todo_screen.dart';
-import 'package:dropnote/features/alarmScreen/alarm_screen.dart';
 import 'package:dropnote/features/homeScreen/components/function_container_01.dart';
 import 'package:dropnote/features/homeScreen/components/function_container_02.dart';
 import 'package:dropnote/features/noteScreen/note_screen.dart';
+import 'package:dropnote/features/scheduleBuilderScreen/schedule_builder_screen.dart';
 import 'package:dropnote/models/weather_model.dart';
 import 'package:dropnote/services/weather_services.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Placemark> placemarks =
       await placemarkFromCoordinates(position.latitude, position.longitude);
   Placemark place = placemarks.first;
-
+print(place.locality);
   // 5. Return city with fallback
   return place.locality ??
       place.subAdministrativeArea ??
@@ -197,14 +197,14 @@ void _getWeather() async {
                         ],
                       ),
                       SizedBox(height: 10),
-                      //ALARM//
+                      //Schedule Builder//
                       FunctionContainer01(
-                        NavigateTo: AlarmScreen(),
-                        icon: Icons.alarm,
-                        icon2: Icons.alarm_add,
+                        NavigateTo: ScheduleBuilderScreen(),
+                        icon: Icons.event,
+                        icon2: Icons.view_timeline,
                         color: Colors.orange,
-                        title: "Alarm",
-                        subtitle: "Set your alarm",
+                        title: "Schedule Builder",
+                        subtitle: "Build your schedule",
                         wide: true,
                       ),
                       SizedBox(height: 30),
