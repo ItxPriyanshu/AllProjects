@@ -37,6 +37,29 @@ TimeOfDay? startTime;
 
 Future<void> pickTime(bool isStart) async {
     final picked = await showTimePicker(
+      builder: (context, child) {
+        return Theme(data: Theme.of(context).copyWith(
+          timePickerTheme: TimePickerThemeData(
+            backgroundColor: const Color.fromARGB(255, 46, 46, 46),
+            hourMinuteColor: Colors.grey.shade800,
+            hourMinuteTextColor: Colors.white,
+            dialBackgroundColor: Colors.grey.shade900,
+            dialHandColor: Colors.blue,
+            dialTextColor: Colors.white,
+            entryModeIconColor: Colors.white,
+            dayPeriodColor: const Color.fromARGB(255, 102, 189, 255),
+            dayPeriodTextColor: Colors.white,
+            dayPeriodBorderSide: const BorderSide(color: Colors.blue),
+            helpTextStyle: const TextStyle(
+              color: Colors.white70,
+              fontSize: 14,
+            ),
+          ),
+          colorScheme: const ColorScheme.dark(
+            primary: Colors.white, // OK / selected color
+          ),
+        ), child: child!);
+      },
       context: context,
       initialTime: TimeOfDay.now(),
     );
@@ -54,6 +77,7 @@ Future<void> pickTime(bool isStart) async {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: const Color.fromARGB(255, 46, 46, 46),
       title: Text(widget.existingCell == null ? "Add Task" : "Edit Task"),
       content: SingleChildScrollView(
         child: Column(
@@ -69,13 +93,13 @@ Future<void> pickTime(bool isStart) async {
                   onPressed: () => pickTime(true),
                   child: Text(startTime == null
                       ? "Start Time"
-                      : startTime!.format(context)),
+                      : startTime!.format(context),style: TextStyle(color: Colors.greenAccent),),
                 ),
                 TextButton(
                   onPressed: () => pickTime(false),
                   child: Text(endTime == null
                       ? "End Time"
-                      : endTime!.format(context)),
+                      : endTime!.format(context),style: TextStyle(color: Colors.greenAccent),),
                 ),
               ],
             ),
@@ -115,9 +139,12 @@ Future<void> pickTime(bool isStart) async {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text("Cancel",style: TextStyle(color: Colors.red)),
+          child: const Text("Cancel",style: TextStyle(color: Colors.redAccent)),
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(65, 184, 184, 184)
+          ),
           onPressed: () {
             if (titleCtrl.text.isEmpty ||
                 startTime == null ||
@@ -133,7 +160,7 @@ Future<void> pickTime(bool isStart) async {
             );
             Navigator.pop(context);
           },
-          child: const Text("Save"),
+          child: const Text("Save",style: TextStyle(color: Colors.white),),
         ),
       ],
     );

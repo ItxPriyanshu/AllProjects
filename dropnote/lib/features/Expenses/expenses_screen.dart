@@ -130,8 +130,8 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen>
                         elevation: 3,
                         shadowColor: Colors.white,
                         child: Ink(
-                          height: 350.h,
-                          width: 300.w,
+                          height: 350,
+                          width: 300,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
                             color: Colors.green,
@@ -171,7 +171,7 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen>
                         bottom: MediaQuery.of(context).viewInsets.bottom,
                       ),
                       decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 12, 154, 7),
+                        color: Color.fromARGB(255, 10, 133, 5),
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(20),
                         ),

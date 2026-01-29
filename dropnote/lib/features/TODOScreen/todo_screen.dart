@@ -1,7 +1,3 @@
-import 'dart:ffi';
-import 'dart:io';
-
-import 'package:dropnote/data/todo_data.dart';
 import 'package:dropnote/features/Expenses/components/customtextfield.dart';
 import 'package:dropnote/models/todo_model.dart';
 import 'package:dropnote/providers/providers.dart';
@@ -36,57 +32,77 @@ class _TodoScreenState extends ConsumerState<TodoScreen> {
                 child: Column(
                   children: [
                     SizedBox(height: 140),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: todolistener.length,
-                      itemBuilder: (context, index) {
-                        final todo = todolistener[index];
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: BoxBorder.all(
-                                color: (todo.isDone)
-                                    ? Colors.white.withAlpha(20)
-                                    : Colors.white,
-                                // const Color.fromARGB(255, 170, 157, 39),
-                                width: 3,
-                              ),
-                              borderRadius: BorderRadius.circular(16),
-                              color: (todo.isDone)
-                                  ? const Color.fromARGB(
-                                      255,
-                                      27,
-                                      125,
-                                      205,
-                                    ).withAlpha(20)
-                                  : const Color.fromARGB(255, 27, 125, 205),
-                            ),
+                    (todolistener.length > 0)
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: todolistener.length,
+                            itemBuilder: (context, index) {
+                              final todo = todolistener[index];
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: BoxBorder.all(
+                                      color: (todo.isDone)
+                                          ? Colors.white.withAlpha(20)
+                                          : Colors.white,
+                                      // const Color.fromARGB(255, 170, 157, 39),
+                                      width: 3,
+                                    ),
+                                    borderRadius: BorderRadius.circular(16),
+                                    color: (todo.isDone)
+                                        ? const Color.fromARGB(
+                                            255,
+                                            27,
+                                            125,
+                                            205,
+                                          ).withAlpha(20)
+                                        : const Color.fromARGB(
+                                            255,
+                                            27,
+                                            125,
+                                            205,
+                                          ),
+                                  ),
 
-                            //List with checkbox
-                            child: CheckboxListTile(
-                              activeColor: Colors.green,
-                              checkColor: Colors.white,
-                              title: Text(
-                                todo.title,
-                                style: GoogleFonts.firaSans(
-                                  decoration: (todo.isDone)
-                                      ? TextDecoration.lineThrough
-                                      : null,
+                                  //List with checkbox
+                                  child: CheckboxListTile(
+                                    activeColor: Colors.green,
+                                    checkColor: Colors.white,
+                                    title: Text(
+                                      todo.title,
+                                      style: GoogleFonts.firaSans(
+                                        decoration: (todo.isDone)
+                                            ? TextDecoration.lineThrough
+                                            : null,
+                                      ),
+                                    ),
+                                    value: todo.isDone,
+                                    onChanged: (context) {
+                                      ref
+                                          .read(todoProvider.notifier)
+                                          .toggleCheckDone(index);
+                                    },
+                                  ),
                                 ),
-                              ),
-                              value: todo.isDone,
-                              onChanged: (context) {
-                                ref
-                                    .read(todoProvider.notifier)
-                                    .toggleCheckDone(index);
-                              },
+                              );
+                            },
+                          )
+                        : Center(
+                            child: Column(
+                              children: [
+                                SizedBox(height: 200),
+                                Text(
+                                  'Your Todo list is empty!',
+                                  style: GoogleFonts.luckiestGuy(
+                                    fontSize: 20,
+                                    color: Colors.redAccent,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        );
-                      },
-                    ),
                   ],
                 ),
               ),
