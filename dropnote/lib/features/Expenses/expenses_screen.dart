@@ -1,9 +1,9 @@
 import 'package:dropnote/features/Expenses/components/customtextfield.dart';
+import 'package:dropnote/features/Expenses/components/expenses_bar.dart';
 import 'package:dropnote/models/expense_item.dart';
 import 'package:dropnote/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -51,6 +51,7 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen>
   @override
   Widget build(BuildContext context) {
     final expenses = ref.watch(expenseProvider);
+    final todayTotal = ref.watch(todayTotalExpenseProvider);
 
     return SafeArea(
       child: Scaffold(
@@ -78,71 +79,113 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen>
                 child: Column(
                   // crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    SizedBox(height: 30,),
                     SizedBox(
-                      height: 150,
-                      width: 150,
-                      child: Lottie.asset(
-                        'assets/lotties/MoneyInvestment.json',
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Center(
-                      child: Text(
-                        'Expenses',
-                        style: GoogleFonts.firaSans(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
+                      height: 220,
+                      child: PageView(
+                        physics: BouncingScrollPhysics(),
+                        children:[ Column(
+                          children: [
+                            SizedBox(
+                              height: 150,
+                              width: 150,
+                              child: Lottie.asset(
+                                'assets/lotties/MoneyInvestment.json',
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Center(
+                              child: Text(
+                                'Expenses',
+                                style: GoogleFonts.firaSans(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Text(
+                                'Total:  ₹ ${todayTotal.toStringAsFixed(4)}',
+                                style: GoogleFonts.firaSans(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                            
+                          ],
                         ),
+                        //bargraph
+                        ExpensesBar(),
+                        ],
                       ),
                     ),
-                    Center(
-                      child: Text(
-                        'Total',
-                        style: GoogleFonts.firaSans(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 50,),
+                    SizedBox(height: 5,),
+                    Text('Swipe ← →',style: GoogleFonts.firaSansCondensed(fontSize: 12,color: Colors.grey),),
+                    SizedBox(height: 50),
+
                     //list of expenses
+                    (expenses.length > 0)
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: expenses.length,
+                            itemBuilder: (context, index) {
+                              final expense = expenses[index];
+                              return ListTile(
+                                title: Text(
+                                  expense.name,
+                                  style: GoogleFonts.firaSans(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
 
-                    (expenses.length>0)?
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: expenses.length,
-                      itemBuilder: (context, index) {
-                        final expense = expenses[index];
-                        return ListTile(
-                          title: Text(expense.name,style: GoogleFonts.firaSans(fontWeight: FontWeight.bold),),
-
-                          subtitle: Text(DateFormat('dd mm yyyy,   HH:mm').format(expense.dateTime)),
-                          trailing: Text("₹${expense.amount}",style: GoogleFonts.firaSans(fontWeight: FontWeight.bold,fontSize: 17),),
-                        );
-                      },
-                    )
-                    //if list is empty ->>> container
-                    :Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Material(
-                        borderRadius: BorderRadius.circular(16),
-                        elevation: 3,
-                        shadowColor: Colors.white,
-                        child: Ink(
-                          height: 350,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: Colors.green,
+                                subtitle: Text(
+                                  DateFormat(
+                                    'dd mm yyyy,   HH:mm',
+                                  ).format(expense.dateTime),
+                                ),
+                                trailing: Text(
+                                  "₹${expense.amount}",
+                                  style: GoogleFonts.firaSans(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              );
+                            },
+                          )
+                        //if list is empty ->>> container
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Material(
+                              borderRadius: BorderRadius.circular(16),
+                              elevation: 3,
+                              shadowColor: Colors.white,
+                              child: Ink(
+                                height: 350,
+                                width: 300,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  color: Colors.green,
+                                ),
+                                child: Column(
+                                  children: [
+                                    Lottie.asset(
+                                      'assets/lotties/emptyGhost.json',
+                                    ),
+                                    Text(
+                                      "No Expenses",
+                                      style: GoogleFonts.luckiestGuy(
+                                        fontSize: 30,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
-                          child: Column(children: [
-                            Lottie.asset('assets/lotties/emptyGhost.json'),
-                            Text("No Expenses",style: GoogleFonts.luckiestGuy(fontSize: 30,color: Colors.white),),
-                          ],),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -238,25 +281,42 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen>
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
                               ),
-                              onPressed: (spentoncontroller.text.length>0 && amountcontroller.text.length>0)? () {
-                                final newExpense = ExpenseItem(
-                                  name: spentoncontroller.text,
-                                  amount: amountcontroller.text,
-                                  dateTime: DateTime.now(),
-                                );
+                              onPressed:
+                                  (spentoncontroller.text.length > 0 &&
+                                      amountcontroller.text.length > 0)
+                                  ? () {
+                                      final newExpense = ExpenseItem(
+                                        name: spentoncontroller.text,
+                                        amount: amountcontroller.text,
+                                        dateTime: DateTime.now(),
+                                      );
 
-                                ref.read(expenseProvider.notifier).addNewExpense(newExpense);
-                                spentoncontroller.clear();
-                                amountcontroller.clear();
-                                Navigator.pop(context);
-                              }:null,
-                              child: (spentoncontroller.text.length>0 && amountcontroller.text.length>0)?Text(
-                                "ADD",
-                                style: GoogleFonts.firaSansCondensed(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ):Text('--',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),),
+                                      ref
+                                          .read(expenseProvider.notifier)
+                                          .addNewExpense(newExpense);
+                                      spentoncontroller.clear();
+                                      amountcontroller.clear();
+                                      Navigator.pop(context);
+                                    }
+                                  : null,
+                              child:
+                                  (spentoncontroller.text.length > 0 &&
+                                      amountcontroller.text.length > 0)
+                                  ? Text(
+                                      "ADD",
+                                      style: GoogleFonts.firaSansCondensed(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )
+                                  : Text(
+                                      '--',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
                             ),
                           ),
                         ],

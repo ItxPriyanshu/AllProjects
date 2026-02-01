@@ -5,20 +5,22 @@ import 'package:dropnote/features/homeScreen/components/function_container_02.da
 import 'package:dropnote/features/noteScreen/note_screen.dart';
 import 'package:dropnote/features/scheduleBuilderScreen/schedule_builder_screen.dart';
 import 'package:dropnote/models/weather_model.dart';
+import 'package:dropnote/providers/providers.dart';
 import 'package:dropnote/services/weather_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     _getWeather();
@@ -97,6 +99,7 @@ void _getWeather() async {
 
   @override
   Widget build(BuildContext context) {
+    final todayTotal = ref.watch(todayTotalExpenseProvider);
     DateTime now = DateTime.now();
     final hour = now.hour;
     return SafeArea(
@@ -251,10 +254,9 @@ void _getWeather() async {
                         title: "Expenses",
                         subtitle: "Track your weekly expenses",
                         widget: Text(
-                          '₹ 753',
+                          "₹ ${todayTotal.toStringAsFixed(2)}",
                           style: GoogleFonts.firaSans(
                             fontWeight: FontWeight.bold,
-                            fontSize: 30,
                           ),
                         ),
                       ),

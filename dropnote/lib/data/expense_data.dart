@@ -70,7 +70,7 @@ Map<String,double> calculateDailyExpenseSummary(){
   23052025:345.5 
   like this 
    */
-  for(var expense in overallExpenseList){
+  for(var expense in state){
     String date = convertDateTimeToString(expense.dateTime);
     double amount = double.parse(expense.amount);
 //check for same day if exist add the amount to existing amount
@@ -79,8 +79,8 @@ Map<String,double> calculateDailyExpenseSummary(){
       currentAmount+= amount;
       dailyExpenseSummary[date] = currentAmount;
     }else{
-      // dailyExpenseSummary.addAll({date: amount});
-      dailyExpenseSummary[date] = amount;
+      dailyExpenseSummary.addAll({date: amount});
+      // dailyExpenseSummary[date] = amount;
 
       //the above two line do the same thing add amount while creating a new date
       //for multiple creation or insertion use addAll(MAP inbuilt Function) method and if only 1
