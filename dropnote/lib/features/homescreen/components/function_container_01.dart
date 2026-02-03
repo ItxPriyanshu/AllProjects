@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:dropnote/features/noteScreen/note_screen.dart';
+import 'package:dropnote/features/NoteScreen/note_screen.dart';
 
 class FunctionContainer01 extends StatelessWidget {
   final IconData icon;

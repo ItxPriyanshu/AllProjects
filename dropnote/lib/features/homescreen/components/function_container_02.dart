@@ -11,6 +11,7 @@ class FunctionContainer02 extends StatelessWidget {
   final String subtitle;
   final Widget widget;
   final Color tilecolor;
+  final Color tilecolor2;
   final Widget? NavigateTo;
   const FunctionContainer02({
     Key? key,
@@ -20,6 +21,7 @@ class FunctionContainer02 extends StatelessWidget {
     required this.subtitle,
     required this.widget,
     this.tilecolor = const Color.fromARGB(255, 43, 84, 56),
+     this.tilecolor2=const Color(0xFF111212),
     this.NavigateTo = null,
   }) : super(key: key);
 
@@ -61,7 +63,7 @@ class FunctionContainer02 extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             // color: Color.fromARGB(80, 62, 86, 76),
             gradient: LinearGradient(
-              colors: [const Color(0xFF111212), tilecolor],
+              colors: [tilecolor2, tilecolor],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
