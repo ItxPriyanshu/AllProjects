@@ -43,3 +43,24 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+
+# ===============================
+# Secrets & Environment Variables
+# ===============================
+.env
+.env.*
+*.env
+
+# ===============================
+# Firebase (ALL Flutter projects)
+# ===============================
+# FlutterFire generated config
+lib/firebase_options.dart
+
+# Android Firebase
+android/app/google-services.json
+
+# iOS Firebase
+ios/Runner/GoogleService-Info.plist
+ios/firebase_app_id_file.json
