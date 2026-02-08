@@ -27,7 +27,7 @@ TimeOfDay? startTime;
 @override
   void initState() {
     titleCtrl = TextEditingController(
-        text: widget.existingCell?.title ?? "");
+    text: widget.existingCell?.title ?? "");
     startTime = widget.existingCell?.startTime;
     endTime = widget.existingCell?.endTime;
     selectedColor = widget.existingCell?.color ?? Colors.blue;
