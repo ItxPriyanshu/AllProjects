@@ -8,10 +8,11 @@ For example, "ace" is a subsequence of "abcde".
 A common subsequence of two strings is a subsequence that is common to both strings.
 */
 
+
 #include<bits/stdc++.h>
 using namespace std;
 
-//Using DP (optmized)
+//Using DP (optmized solution)
 class Solution {
 private: 
     int solve(string& text1, string& text2, int i , int j,vector<vector<int>>& dp){
