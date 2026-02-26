@@ -111,7 +111,6 @@ Future<void> pickTime(bool isStart) async {
                 Colors.green,
                 Colors.orange,
                 Colors.purple,
-                Colors.yellow,
               ].map((c) {
                 return GestureDetector(
                   onTap: () => setState(() => selectedColor = c),
