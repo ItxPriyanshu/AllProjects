@@ -1,83 +1,107 @@
-# Projects Portfolio
+# 🚀 Projects Portfolio
 
-This repository contains a collection of my development and design projects.  
-I am an App Developer and UI/UX Designer with experience in building mobile applications, backend services, and interactive user interfaces.  
-My work ranges from functional utility apps to gamified learning solutions and UI/UX design prototypes.
-
-The projects listed below represent my learning journey and practical experience in Flutter, Node.js, MongoDB, and UI/UX design tools such as Figma.
+A collection of my development and design projects, showcasing my experience in building mobile applications, backend systems, and user-centric interfaces.
 
 ---
 
-## 📱 Mobile Application Projects
+## 📱 Development Projects
 
-### 1. Gamified Learning Platform for Rural Areas (SIH Project)
-A collaborative Smart India Hackathon project focused on enhancing learning for rural students through gamification.  
-Includes a 2-D combat game that reacts to quiz performance, AI assistance for student doubts, progress tracking, and structured study resources.  
-**Technology:** Flutter, Node.js, MongoDB  
-**Repository:** https://github.com/urastogi2048/SIH2K25
+### 🏥 ConsultOne — Doctor–Patient Consultation Platform
+A full-stack healthcare platform enabling secure and instant doctor–patient consultations with AI-assisted features.
 
----
+- 📹 Real-time video consultations  
+- 🤖 AI-powered report analysis  
+- 🔒 Secure authentication & communication  
+- 💳 Integrated digital payments  
 
-### 2. TODO App
-A task management application with support for categories, offline storage, and a clean user interface.  
-**Technology:** Flutter  
-**Repository:** https://github.com/ItxPriyanshu/MyProjects/tree/main/todo
+**Tech Stack:** Flutter, Node.js, Express.js, MongoDB  
+🔗 Repository: ConsultOne/Team-Orbital  
 
 ---
 
-### 3. Fun Lottery App
-A simple lottery-style entertainment app with animations and basic result logic.  
-**Technology:** Flutter  
-**Repository:** https://github.com/ItxPriyanshu/MyProjects/tree/main/Lottery
+### 🧠 Gamified Learning Platform (SIH 2025)
+A Smart India Hackathon project focused on improving rural education through gamification and AI-based assistance.
+
+- 🎮 Quiz-based 2D game interaction  
+- 🤖 AI doubt assistance  
+- 📊 Progress tracking system  
+
+**Tech Stack:** Flutter, Node.js, MongoDB  
+🔗 Repository: https://github.com/urastogi2048/SIH2K25  
 
 ---
 
-### 4. Calculator App
-A minimal and functional calculator supporting basic arithmetic operations with a clean UI.  
-**Technology:** Flutter  
-**Repository:** https://github.com/ItxPriyanshu/MyProjects/tree/main/my_calculator
+### 📝 TODO App
+A task management application with category support, offline storage, and a clean UI.
+
+**Tech Stack:** Flutter  
+🔗 Repository: https://github.com/ItxPriyanshu/MyProjects/tree/main/todo  
 
 ---
 
-### 5. Dare TicTacoe (Ongoing)
-A Tic-Tac-Toe game enhanced with **spicy dare-based features** that make gameplay more interactive and fun.  
-Currently under development with a focus on UI, game logic, and unique player challenges.  
-**Technology:** Flutter  
-**Repository:** https://github.com/ItxPriyanshu/AllProjects/tree/main/tictactoe
+### 🎲 Lottery App
+A simple entertainment app with animations and randomized results.
+
+**Tech Stack:** Flutter  
+🔗 Repository: https://github.com/ItxPriyanshu/MyProjects/tree/main/Lottery  
+
+---
+
+### 🧮 Calculator App
+A minimal calculator supporting basic arithmetic operations with a clean interface.
+
+**Tech Stack:** Flutter  
+🔗 Repository: https://github.com/ItxPriyanshu/MyProjects/tree/main/my_calculator  
+
+---
+
+### 🎯 Dare TicTacToe (Ongoing)
+An interactive Tic-Tac-Toe game enhanced with dare-based gameplay features.
+
+**Tech Stack:** Flutter  
+🔗 Repository: https://github.com/ItxPriyanshu/AllProjects/tree/main/tictactoe  
 
 ---
 
 ## 🎨 UI/UX Design Projects
 
-### 1. Roxxy AI Website UI/UX
-A responsive website interface designed for a conceptual multi-functional AI platform.  
+### 🤖 Roxxy AI Platform UI
+A responsive UI design for a conceptual AI-powered platform.
+
 **Tool:** Figma  
-**Design:** https://www.figma.com/design/mj7L4FVUkbhvmTEjn75eRb/Ai-Roxxy
+🎨 Design: https://www.figma.com/design/mj7L4FVUkbhvmTEjn75eRb/Ai-Roxxy  
 
 ---
 
-### 2. Travel Website UI/UX
-A clean and modern travel booking website interface created using Figma and Canva.  
-**Tool:** Figma  
-**Design:** https://www.figma.com/design/4tNyAnwp1EYc02A5Emcz1Y/Travel
+### ✈️ Travel Website UI
+A modern travel booking interface focused on usability and clean design.
+
+**Tools:** Figma, Canva  
+🎨 Design: https://www.figma.com/design/4tNyAnwp1EYc02A5Emcz1Y/Travel  
 
 ---
 
 ## 👨‍💻 About Me
 
-I am an App Developer and UI/UX Designer with skills in:
-- Flutter (Dart)
-- Node.js and MongoDB
-- UI/UX tools like Figma and Canva
-- Designing engaging and accessible user experiences
+I am an App Developer and UI/UX Designer with experience in:
 
-I enjoy working on meaningful projects, especially those that improve learning, productivity, or user engagement.
+- Flutter (Dart)  
+- Node.js & Express.js  
+- MongoDB  
+- Figma & Canva  
+
+I enjoy building impact-driven applications that improve usability, accessibility, and user engagement.
 
 ---
 
-## 🎯 Purpose of This Portfolio
+## 🎯 Purpose
 
-This repository serves as a consolidated view of my development and design work.  
-It highlights my technical abilities, creativity, and continuous learning in the fields of app development and user interface design.
+This repository serves as a centralized portfolio showcasing my:
 
-New projects will be added regularly as I continue to build and improve my skills.
+- Technical skills  
+- Design capabilities  
+- Practical project experience  
+
+---
+
+⭐ New projects and updates will be added regularly.
