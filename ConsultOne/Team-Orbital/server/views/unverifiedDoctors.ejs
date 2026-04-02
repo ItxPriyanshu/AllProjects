@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unverified Doctors - Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-danger">Unverified Doctors</h2>
+        <a href="/admin" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+
+    <!-- Doctor Count -->
+    <div class="alert alert-warning">
+        Pending Approvals: <strong><%= doctors.length %></strong>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Speciality</th>
+                    <th>Fees</th>
+                    <th>Registration No</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <% if (doctors.length === 0) { %>
+                    <tr>
+                        <td colspan="7" class="text-center text-success">
+                            All Doctors Verified 🎉
+                        </td>
+                    </tr>
+                <% } %>
+
+                <% doctors.forEach(function(doctor, index){ %>
+                    <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= doctor.name %></td>
+                        <td><%= doctor.email %></td>
+                        <td><%= doctor.speciality %></td>
+                        <td>₹ <%= doctor.fees %></td>
+                        <td><%= doctor.licenceId %></td>
+                        <td>
+                            <form action="/admin/verification/<%= doctor._id %>" method="POST">
+                                <button class="btn btn-success btn-sm">
+                                    Verify
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

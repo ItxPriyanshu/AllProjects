@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Patient Issues - Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">All Patient Issues</h2>
+        <a href="/admin" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+
+    <!-- Issue Count -->
+    <div class="alert alert-warning">
+        Total Issues: <strong><%= issues.length %></strong>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Patient Name</th>
+                    <th>Doctor Registration ID</th>
+                    <th>Problem</th>
+                    <th>Submitted At</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <% if (issues.length === 0) { %>
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">
+                            No Issues Found
+                        </td>
+                    </tr>
+                <% } %>
+
+                <% issues.forEach(function(issue, index){ %>
+                    <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= issue.name %></td>
+                        <td><%= issue.registrationID %></td>
+                        <td><%= issue.problem %></td>
+                        <td>
+                            <%= new Date(issue.createdAt).toLocaleString() %>
+                        </td>
+                    </tr>
+                <% }) %>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

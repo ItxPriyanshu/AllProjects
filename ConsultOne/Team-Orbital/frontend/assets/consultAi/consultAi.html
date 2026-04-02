@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>ConsultAI</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eaf4ff; /* Light Blue Background */
+    }
+
+    .chat-container::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-container::-webkit-scrollbar-thumb {
+      background: #60a5fa; /* Light Blue Scroll */
+      border-radius: 6px;
+    }
+/* Whole Header Float Animation */
+
+.header-animate {
+  animation: headerFloat 4s ease-in-out infinite;
+}
+
+
+
+/* Typing animation */
+/* @keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blinkCursor {
+  50% { border-color: transparent }
+}
+
+.typing-text {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation: typing 2s steps(10, end) forwards;
+} */
+/* .ecg-container {
+  width: 80px;
+  height: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ecg-line {
+  width: 200%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #22c55e 30%, #22c55e 70%, transparent);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: ecgMove 2s linear infinite;
+}
+
+@keyframes ecgMove {
+  0% { left: -100%; }
+  100% { left: 0%; }
+} */
+.medical-icons {
+  position: relative;
+  width: 120px;
+  height: 50px;
+  pointer-events: none;
+}
+
+.icon {
+  position: absolute;
+  font-size: 18px;
+  opacity: 1;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Different positions */
+.icon1 { top: 5px; left: 10px; animation-delay: 0s; }
+.icon2 { top: 20px; left: 50px; animation-delay: 1s; }
+.icon3 { top: 0px; right: 20px; animation-delay: 2s; }
+.icon4 { bottom: 0px; right: 5px; animation-delay: 3s; }
+
+/* Floating + rotating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(10deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+  </style>
+</head>
+
+<body class="w-screen h-screen bg-[#eaf4ff]">
+
+  <div class="bg-white w-full h-full flex flex-col p-4">
+
+
+    <!-- Header -->
+<div class="flex items-center justify-between border-b pb-4 relative">
+
+  <!-- LEFT SIDE -->
+  <div class="flex items-center">
+    <div class="w-10 h-10 bg-blue-400 border-2 border-black rounded-full flex items-center justify-center text-xl font-bold animate-pulse">
+      🧑🏻‍⚕️
+    </div>
+
+    <div class="ml-3">
+      <h2 class="text-lg font-semibold text-gray-800">ConsultAI</h2>
+      <p class="text-xs text-green-500">Active</p>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE FLOATING MEDICAL ICONS -->
+  <div class="medical-icons">
+    <span class="icon icon1">💊</span>
+    <span class="icon icon2">❤️</span>
+    <span class="icon icon3">🧬</span>
+    <span class="icon icon4">🩺</span>
+  </div>
+
+</div>
+
+    <!-- Chat History -->
+    <div id="chat-history" class="flex-grow overflow-y-auto py-4 space-y-4 chat-container">
+
+      <!-- Initial Message -->
+      <div class="flex justify-start">
+        <div class="bg-blue-50 p-4 rounded-lg max-w-xs text-gray-800 shadow leading-relaxed text-sm">
+          <strong>Hello! 👋 I’m your Health Assistant.</strong><br><br>
+          I can help you with:<br>
+          • Symptoms guidance<br>
+          • Medicine information<br>
+          • General health advice<br>
+          • When to consult a doctor<br><br>
+          How can I assist you today?
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Input Section -->
+    <form id="chat-form" class="flex pt-4 border-t">
+      <input
+        id="user-input"
+        type="text"
+        placeholder="Ask health related question..."
+        class="flex-grow p-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-400"
+        autocomplete="off"
+      />
+      <button
+        type="submit"
+        class="ml-2 px-4 bg-blue-400 text-white rounded-2xl hover:bg-blue-500 transition">
+        Send
+      </button>
+    </form>
+
+  </div>
+
+  <script>
+    const chatForm = document.getElementById("chat-form");
+    const userInput = document.getElementById("user-input");
+    const chatHistory = document.getElementById("chat-history");
+
+    const BACKEND_URL = "https://team-orbital.onrender.com/home/gemini";
+
+    function appendMessage(sender, message) {
+      const wrapper = document.createElement("div");
+      wrapper.className = sender === "user"
+        ? "flex justify-end"
+        : "flex justify-start";
+
+      const bubble = document.createElement("div");
+      bubble.className = sender === "user"
+        ? "bg-blue-400 text-white p-3 rounded-lg max-w-xs shadow text-sm"
+        : "bg-gray-100 text-gray-700 p-3 rounded-lg max-w-xs shadow text-sm";
+
+      bubble.innerHTML = message.replace(/\n/g, "<br>");
+      wrapper.appendChild(bubble);
+      chatHistory.appendChild(wrapper);
+
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+
+    chatForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      appendMessage("user", message);
+      userInput.value = "";
+
+      const typingDiv = document.createElement("div");
+      typingDiv.id = "typing";
+      typingDiv.className = "flex justify-start";
+      typingDiv.innerHTML = `
+        <div class="bg-gray-100 p-3 rounded-lg max-w-xs text-gray-700 shadow animate-pulse text-sm">
+          Typing...
+        </div>
+      `;
+      chatHistory.appendChild(typingDiv);
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+
+      try {
+        const response = await fetch(BACKEND_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ prompt: message })
+        });
+
+        const data = await response.json();
+
+        const typingEl = document.getElementById("typing");
+        if (typingEl) typingEl.remove();
+
+        appendMessage("bot", data.reply || "No response received.");
+
+      } catch (error) {
+        const typingEl = document.getElementById("typing");
+        if (typingEl) typingEl.remove();
+
+        appendMessage("bot", "Server error. Please try again.");
+      }
+    });
+  </script>
+
+</body>
+</html>
