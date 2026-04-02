@@ -15,7 +15,7 @@ A full-stack healthcare platform enabling secure and instant doctor–patient co
 - 💳 Integrated digital payments  
 
 **Tech Stack:** Flutter, Node.js, Express.js, MongoDB  
-🔗 Repository: ConsultOne/Team-Orbital  
+🔗 Repository: https://github.com/BIT-BY-BIT-26/Team-Orbital.git
 
 ---
 
