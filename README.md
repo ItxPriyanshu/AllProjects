@@ -6,7 +6,7 @@ A collection of my development and design projects, showcasing my experience in 
 
 ## 📱 Development Projects
 
-### 🏥 ConsultOne — Doctor–Patient Consultation Platform (BIt-by-Bit Hackathon)
+### 🏥 ConsultOne — Doctor–Patient Consultation Platform (BIt-by-Bit Hackathon 2026)
 A full-stack healthcare platform enabling secure and instant doctor–patient consultations with AI-assisted features.
 
 - 📹 Real-time video consultations  
