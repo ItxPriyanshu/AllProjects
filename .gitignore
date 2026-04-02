@@ -1,20 +1,41 @@
+# =========================
 # Flutter
+# =========================
 **/build/
 **/.dart_tool/
 
+# =========================
 # Node
+# =========================
 **/node_modules/
 **/.env
 
-# IDE
+# =========================
+# IDE / Editor
+# =========================
 **/.idea/
 **/.vscode/
 
-# OS
+# =========================
+# OS files
+# =========================
 Thumbs.db
 .DS_Store
 
-# Firebase config
-android/app/google-services.json
-ios/Runner/GoogleService-Info.plist
-lib/firebase_options.dart
+# =========================
+# Firebase config (IMPORTANT)
+# =========================
+**/google-services.json
+**/GoogleService-Info.plist
+**/firebase_options.dart
+
+# =========================
+# Backend secrets
+# =========================
+.env
+*.env
+
+# =========================
+# Service account keys
+# =========================
+*serviceAccountKey.json
