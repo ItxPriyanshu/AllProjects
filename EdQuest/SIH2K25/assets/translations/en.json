@@ -1,0 +1,17 @@
+{
+  "greeting": "Hey {0} 👋",
+  "ready_to": "Ready To",
+  "level_up": "Level Up",
+  "today": "Today?",
+  "search_hint": "Search what you want to learn",
+  "math": "Mathematics",
+  "science": "Science",
+  "computer_science": "Computer Science",
+  "topic1":"Motion and Its Types",
+
+  "content1": "An object is said to be in motion if it changes its position with time. Motion is of different types:\n1) Rectilinear motion (a car moving on a straight road),\n2) Circular motion (the earth moving around the sun),\n3) Rotational motion (spinning of a top), and\n4) Periodic motion (a pendulum, swing).",
+  "topic2":"Relative nature of motion",
+   "content2": "Motion is always relative. For example, if you are sitting in a moving bus, you are at rest with respect to the seat but in motion with respect to the trees outside.\nPYQs:\n• If you are sitting in a moving train, in what sense are you at rest and in what sense are you in motion?\n• Why is motion relative? Explain with an example.",
+  "change_language": "Change Language",
+  "settings" :  "Settings"
+}

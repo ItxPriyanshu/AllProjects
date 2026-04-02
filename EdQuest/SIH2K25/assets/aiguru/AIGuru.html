@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIगुरु Chatbot</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fef9e7;
+    }
+
+    /* Custom scrollbar */
+    .chat-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .chat-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .chat-container::-webkit-scrollbar-thumb {
+      background-color: #fcd34d;
+      border-radius: 4px;
+    }
+
+    .chat-container {
+      -ms-overflow-style: none;
+      scrollbar-width: thin;
+    }
+  </style>
+</head>
+
+<body class="flex items-center justify-center min-h-screen">
+  <div
+    class="bg-white p-6 rounded-3xl shadow-2xl w-full max-w-lg mx-4 flex flex-col h-[80vh] md:h-[700px] border border-gray-200">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between pb-4 border-b border-gray-200">
+      <div class="flex items-center">
+        <div
+          class="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center text-white text-xl font-bold">
+          🤖
+        </div>
+        <div class="ml-4">
+          <h1 class="text-xl font-semibold text-gray-800">AIगुरु</h1>
+          <p class="text-xs text-green-500">Online</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat History -->
+    <div id="chat-history" class="flex-grow overflow-y-auto space-y-4 py-4 pr-2 chat-container">
+      <div class="flex items-start justify-start">
+        <div class="bg-gray-100 p-3 rounded-lg max-w-xs text-gray-700 shadow">
+          <p>Hello! I am AIगुरु, the chatbot for this gamified rural education platform. How can I help you today?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <form id="chat-form" class="flex items-center pt-4 border-t border-gray-200">
+      <input id="user-input" type="text" placeholder="Type your message here..."
+        class="flex-grow p-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-200"
+        autocomplete="off" />
+      <button type="submit"
+        class="ml-3 p-3 bg-yellow-400 text-white rounded-2xl hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-200 shadow-md">
+        Send
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const chatForm = document.getElementById('chat-form');
+    const userInput = document.getElementById('user-input');
+    const chatHistory = document.getElementById('chat-history');
+
+    function appendMessage(sender, message) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `flex items-start ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+
+      const messageBubble = document.createElement('div');
+      messageBubble.className = `p-3 rounded-lg max-w-xs shadow ${sender === 'user'
+        ? 'bg-yellow-400 text-white'
+        : 'bg-gray-100 text-gray-700'
+        }`;
+
+      messageBubble.innerHTML = message.replace(/\n/g, '<br>');
+      messageDiv.appendChild(messageBubble);
+      chatHistory.appendChild(messageDiv);
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+
+    chatForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const userMessage = userInput.value.trim();
+      if (!userMessage) return;
+
+      appendMessage('user', userMessage);
+      userInput.value = '';
+
+      // Typing indicator
+      const typingIndicator = document.createElement('div');
+      typingIndicator.id = 'typing-indicator';
+      typingIndicator.className = 'flex items-start justify-start';
+      typingIndicator.innerHTML = `
+        <div class="bg-gray-100 p-3 rounded-lg max-w-xs text-gray-700 shadow">
+          <p class="animate-pulse">Typing...</p>
+        </div>`;
+      chatHistory.appendChild(typingIndicator);
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+
+      try {
+        const apiKey = "AIzaSyBGF72-JbRspDKIA9bfQsjWET3PeFnOgg8";
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+        const systemPrompt = `You are AIGuru, a friendly chatbot for the EdQuest app (a gamified rural education platform for STEM grades 6-12). Keep answers relevant to the app or STEM topics. Redirect unrelated queries politely.`;
+
+        const payload = {
+          contents: [{ parts: [{ text: userMessage }] }],
+          systemInstruction: { parts: [{ text: systemPrompt }] }
+        };
+
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+        const generatedText =
+          result?.candidates?.[0]?.content?.parts?.[0]?.text ||
+          'No response received.';
+
+        setTimeout(() => {
+          const typingEl = document.getElementById('typing-indicator');
+          if (typingEl) typingEl.remove();
+          appendMessage('bot', generatedText);
+        }, 2500);
+
+      } catch (error) {
+        console.error('API Error:', error);
+        const typingEl = document.getElementById('typing-indicator');
+        if (typingEl) typingEl.remove();
+        appendMessage('bot', 'Sorry, I am unable to connect to the AI at the moment. Please try again later.');
+      }
+    });
+  </script>
+</body>
+
+</html>

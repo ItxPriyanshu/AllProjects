@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIगुरु Chatbot</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fef9e7;
+            /* Light yellow background */
+        }
+
+        /* Custom scrollbar styles for a cleaner look */
+        .chat-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-container::-webkit-scrollbar-thumb {
+            background-color: #fcd34d;
+            /* Yellow scrollbar */
+            border-radius: 4px;
+        }
+
+        .chat-container {
+            -ms-overflow-style: none;
+            scrollbar-width: thin;
+        }
+    </style>
+</head>
+
+<body class="flex items-center justify-center min-h-screen">
+
+    <div
+        class="bg-white p-6 rounded-3xl shadow-2xl w-full max-w-lg mx-4 flex flex-col h-[80vh] md:h-[700px] border border-gray-200">
+
+        <!-- Chatbot Header -->
+        <div class="flex items-center justify-between pb-4 border-b border-gray-200">
+            <div class="flex items-center">
+                <div
+                    class="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                    🤖
+                </div>
+                <div class="ml-4">
+                    <h1 class="text-xl font-semibold text-gray-800">AIगुरु </h1>
+                    <p class="text-xs text-green-500">Online</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat History Container -->
+        <div id="chat-history" class="flex-grow overflow-y-auto space-y-4 py-4 pr-2 chat-container">
+            <!-- Initial bot message -->
+            <div class="flex items-start justify-start">
+                <div class="bg-gray-100 p-3 rounded-lg max-w-xs text-gray-700 shadow">
+                    <p>Hello! I am AIगुरु , the chatbot for this gamified rural education platform. How can I help you
+                        today?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Input Form -->
+        <form id="chat-form" class="flex items-center pt-4 border-t border-gray-200">
+            <input type="text" id="user-input" placeholder="Type your message here..."
+                class="flex-grow p-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-200"
+                autocomplete="off" />
+            <button type="submit"
+                class="ml-3 p-3 bg-yellow-400 text-white rounded-2xl hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-200 shadow-md">
+                Send
+            </button>
+        </form>
+
+    </div>
+
+    <script>
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const chatHistory = document.getElementById('chat-history');
+
+        // Function to create and append a new message element to the chat history
+        function appendMessage(sender, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = flex items-start ${sender === 'user' ? 'justify-end' : 'justify-start'};
+
+            const messageBubble = document.createElement('div');
+            messageBubble.className = p-3 rounded-lg max-w-xs shadow ${sender === 'user' ? 'bg-yellow-400 text-white' : 'bg-gray-100 text-gray-700'};
+
+            // To support multi-line responses, replace newlines with <br> tags
+            const formattedMessage = message.replace(/\n/g, '<br>');
+            messageBubble.innerHTML = formattedMessage;
+
+            messageDiv.appendChild(messageBubble);
+            chatHistory.appendChild(messageDiv);
+
+            // Auto-scroll to the bottom of the chat history
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        // Function to handle the form submission and get a response from the API
+        chatForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const userMessage = userInput.value.trim();
+            if (userMessage === '') {
+                return;
+            }
+
+            // Append user's message to the chat history
+            appendMessage('user', userMessage);
+            userInput.value = '';
+
+            // Show a typing indicator while waiting for the API response
+            const typingIndicator = document.createElement('div');
+            typingIndicator.id = 'typing-indicator';
+            typingIndicator.className = 'flex items-start justify-start';
+            typingIndicator.innerHTML = `
+                <div class="bg-gray-100 p-3 rounded-lg max-w-xs text-gray-700 shadow">
+                    <p class="animate-pulse">Typing...</p>
+                </div>
+            `;
+            chatHistory.appendChild(typingIndicator);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+
+            try {
+                // The API key is provided at runtime by the environment
+                const apiKey = "AIzaSyBGF72-JbRspDKIA9bfQsjWET3PeFnOgg8";
+                const apiUrl = https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey};
+
+                // Define the system instruction for the chatbot's persona and knowledge
+                const systemPrompt = `You are AIGuru, a friendly and helpful chatbot for a gamified rural education platform. Your purpose is to assist users with questions about the app's features, benefits, and educational content.
+                
+                The platform's name is "EdQuest." It provides interactive, game-based lessons for students in rural areas, specifically focusing on STEM subjects (Science, Technology, Engineering, and Mathematics) for students in classes 6-12. Key features include:
+                - *Gamified Learning:* Students earn points, badges, and unlock new levels as they complete lessons.
+                - *Offline Access:* All core lesson content can be downloaded and used without an internet connection.
+                - *Teacher Dashboard:* Educators can track student progress and view analytics.
+                - *Community Forums:* Students can ask questions and discuss topics with peers and teachers.
+                - *Quizzes:* Interactive quizzes help students test their knowledge and track progress.
+                
+                When a user asks a question, please respond as AIGuru, a knowledgeable assistant for this specific app. Do not refer to yourself as a general-purpose AI model.
+                
+                You should be able to handle simple greetings and small talk. However, if a user's question is not directly related to the "EdQuest" app, its features, or STEM subjects for grades 6-12, you must gently guide them back to the correct topics. You should not provide answers to non-academic questions. Politely explain your purpose and try to pivot the conversation back to educational content or the app's features.
+                just answer the question nothing more than that.`;
+
+                const payload = {
+                    contents: [{
+                        parts: [{ text: userMessage }]
+                    }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    }
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                // Extract the generated text from the response
+                const generatedText = result.candidates[0].content.parts[0].text;
+
+                // Introduce a 2-3 second delay before displaying the answer
+                setTimeout(() => {
+                    // Remove the typing indicator before appending the bot's response
+                    document.getElementById('typing-indicator').remove();
+
+                    // Append the bot's response to the chat history
+                    appendMessage('bot', generatedText);
+                }, 2500); // 2.5 seconds, can be adjusted for a faster or slower response
+
+            } catch (error) {
+                console.error('API Error:', error);
+
+                // Remove the typing indicator if an error occurs
+                if (document.getElementById('typing-indicator')) {
+                    document.getElementById('typing-indicator').remove();
+                }
+
+                // Append an error message to the chat history
+                appendMessage('bot', 'Sorry, I am unable to connect to the AI at the moment. Please try again later.');
+            }
+        });
+    </script>
+</body>
+
+</html>
